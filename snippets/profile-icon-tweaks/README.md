@@ -1,8 +1,35 @@
 # Profile Icon Tweaks
 
+## Current Information
+
+### Small Icon Shaping
+
+If you would prefer your small and tiny icons to be **squares with rounded corners**:
+
+![Small icons as rounded squares](small-icon-rounded-square.jpg)
+
+    /* small and tiny icons as round-cornered squares */
+    .small-profile-icon,
+    .tiny-profile-icon {
+        border-radius: 4px;
+    }
+    
+...or if you'd like them to be **squares with sharp corners**:
+
+![Small icons as sharp squares](small-icon-square.jpg)
+
+    /* small and tiny icons as sharp-cornered squares */
+    .small-profile-icon,
+    .tiny-profile-icon {
+        border-radius: 0px;
+    }
+
+
+## Legacy Information 
+
 ### Cropping and Positioning
 
-By default, if an image used as a Profile Icon is not exactly square, it gets squished to a 1:1 ration where it's displayed as 'small' (Active Scenes list, marking a pose in a live scene, etc.) or tiny (e.g., the character-choice dropdown in a live scene). On the Characters directory page, tall images are cropped, but wide ones are squished into the space.
+By default, prior to version .72, if an image used as a Profile Icon was not exactly square, it was squished to a 1:1 ration where it was displayed as 'small' (Active Scenes list, marking a pose in a live scene, etc.) or tiny (e.g., the character-choice dropdown in a live scene). On the Characters directory page, tall images were cropped, but wide ones were squished into the space. The following CSS was offered for changing it, but is currently built-in, so you don't need to add it. However, this more or less still explains how it works!
 
 #### Defaults:
 
@@ -27,40 +54,23 @@ This creates a relatively pleasing arrangement for all the images. If someone's 
 
 (And remember: any player can always upload a version of their Profile Icon cropped exactly the way they want it, while still using whatever they like for the main Profile Image on their wiki page. See `/help/profile_tutorial#profile-image-and-icon` on your game's web portal for instructions.)
 
-To set up cropping-and-positioning, this CSS can be copied and pasted into 'Custom CSS Style' (a.k.a custom_style.scss) under 'Website' in 'Admin > Setup'.
+To set up cropping-and-positioning, this CSS could be copied and pasted into 'Custom CSS Style' (a.k.a custom_style.scss) under 'Website' in 'Admin > Setup', but this is no longer necessary as it's now the default arrangement.
 
     /* crop and position icons */
-    .log-icon,
+    log-icon,
+    .relationship-icon,
     .small-profile-icon,
     .tiny-profile-icon {
         object-fit: cover;
         object-position: center 10%;
     }
     .log-icon {
-        width: 150px;
         height: 150px;
+        width: 150px;
     }
-
-### Small Icon Shaping
-
-If you would prefer your small and tiny icons to be **squares with rounded corners**:
-
-![Small icons as rounded squares](small-icon-rounded-square.jpg)
-
-    /* small and tiny icons as round-cornered squares */
-    .small-profile-icon,
-    .tiny-profile-icon {
-        border-radius: 4px;
-    }
-    
-...or if you'd like them to be **squares with sharp corners**:
-
-![Small icons as sharp squares](small-icon-square.jpg)
-
-    /* small and tiny icons as sharp-cornered squares */
-    .small-profile-icon,
-    .tiny-profile-icon {
-        border-radius: 0px;
+    .relationship-icon {
+        height: 100px;
+        width: 100px;
     }
 
 &mdash; Contributed by [Ren](https://arescentral.aresmush.com/handle/Ren)
