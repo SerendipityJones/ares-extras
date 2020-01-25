@@ -1,0 +1,75 @@
+{{title "Unshared Scenes"}}
+<h1>Unshared Scenes</h1>
+
+{{#if model.unshared}}
+<p>You have the following stopped, unshared scenes. {{#if model.unshared_deletion_on}} Unshared scenes may be deleted after {{model.unshared_deletion_days}} days, so you should download or share them before that happens.{{/if}}</p>
+
+{{#each model.unshared as |scene|}}
+<table class="unshared">
+    <tr>
+        <td rowspan="4">
+            {{#link-to 'scene-live' scene.id}}Scene {{scene.id}}{{/link-to}}
+        </td>
+        <td colspan="2">
+            {{#if scene.title}}
+                {{scene.title}}
+            {{else}}
+                {{#link-to 'scene-edit' scene.id class="missing"}}Missing Title{{/link-to}}
+            {{/if}}
+            {{scene-type-tag scene=scene}}
+            {{#if scene.content_warning}}
+                {{content-warning-tag warning=scene.content_warning position='top'}}
+            {{/if}}
+        </td>
+        <td rowspan="4">
+            {{#if scene.time_left}}
+                <span class="timeleft unshared-{{if (gt scene.time_left 3) (if (gt scene.time_left model.unshared_warning_days) 'safe' 'warning') 'danger'}}">{{scene.time_left}} day{{if (eq scene.time_left 1) '' 's'}} left</span>
+            {{/if}}
+            {{#link-to 'scene-edit' scene.id class="btn btn-default"}}Edit Scene{{/link-to}}
+            {{#if (and scene.title scene.icdate scene.location (gt scene.summary.length 12))}}
+                <button class="btn btn-primary" {{action 'shareScene' scene.id}}>Share Scene</button>
+            {{/if}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {{#if scene.icdate}}
+                {{scene.icdate}}
+            {{else}}
+                {{#link-to 'scene-edit' scene.id class="missing"}}Missing Date{{/link-to}}
+            {{/if}}
+        </td>
+        <td>
+            {{#if scene.location}}
+                {{scene.location}}
+            {{else}}
+                {{#link-to 'scene-edit' scene.id class="missing"}}Missing Location{{/link-to}}
+            {{/if}}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            {{#if scene.participants}}
+                {{#each scene.participants as |char|}}
+                    {{char-icon-inline char=char}}
+                {{/each}}
+            {{else}}
+                {{#link-to 'scene-edit' scene.id class="missing"}}No Participants{{/link-to}}
+            {{/if}}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            {{#if (gt scene.summary.length 12)}}
+                {{{ansi-format text=scene.summary}}}
+            {{else}}
+                {{#link-to 'scene-edit' scene.id class="missing"}}Missing Summary{{/link-to}}
+            {{/if}}
+        </td>
+    </tr>
+</table>
+{{/each}}
+{{else}}
+<p>You currently have no unshared scenes.</p>
+{{/if}}
+{{outlet}}
