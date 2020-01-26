@@ -25,6 +25,14 @@
             {{#if scene.time_left}}
                 <span class="timeleft unshared-{{if (gt scene.time_left 3) (if (gt scene.time_left model.unshared_warning_days) 'safe' 'warning') 'danger'}}">{{scene.time_left}} day{{if (eq scene.time_left 1) '' 's'}} left</span>
             {{/if}}
+            <div class="buttons">
+                <button class="btn btn-half btn-default unshared-safe" {{action 'restartScene' scene.id}}>
+                    <i class="fas fa-play" aria-label="Restart Scene"></i>
+                </button>
+                <button class="btn btn-half btn-default unshared-danger" {{action 'deleteScene' scene.id}}>
+                    <i class="fa fa-trash" aria-label="Delete Scene"></i>
+                </button>
+            </div>
             {{#link-to 'scene-edit' scene.id class="btn btn-default"}}Edit Scene{{/link-to}}
             {{#if (and scene.title scene.icdate scene.location (gt scene.summary.length 12))}}
                 <button class="btn btn-primary" {{action 'shareScene' scene.id}}>Share Scene</button>
