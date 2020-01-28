@@ -19,6 +19,7 @@ module AresMUSH
                   date_completed: s.date_completed,
                   time_left: time_left(s),
                   can_view: enactor && Scenes.can_read_scene?(enactor, s),
+                  cannot_delete: !(enactor && Scenes.can_delete_scene?(enactor, s)),
                   is_private: s.private_scene,
                   participants: Scenes.participants_and_room_chars(s)
                       .select { |p| !p.who_hidden }
